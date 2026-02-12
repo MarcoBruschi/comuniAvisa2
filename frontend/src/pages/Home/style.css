@@ -1,0 +1,108 @@
+.home {
+  background-color: black;
+  color: white;
+  height: 100%;
+  text-align: center;
+  min-height: 100vh;
+  animation: loaded 1s ease;
+}
+
+.navbar-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-right: 1em;
+}
+
+.hero {
+  background-color: rgba(26, 26, 26, 1);
+  padding: 8em 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-cta {
+  font-size: 24px;
+  max-width: 70%;
+  font-weight: 300;
+  line-height: 1.5em;
+}
+
+strong {
+  font-weight: bold;
+  border-bottom: 2px solid goldenrod;
+}
+
+.about {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+}
+
+.about-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.about-cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+}
+
+.card {
+  padding: 2em 1em;
+  background-color: rgba(26, 26, 26, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  border-radius: 10px;
+  border: 2px solid white;
+  transition: transform 0.5s;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  transform: translateY(-10px);
+  background-color: rgb(61, 61, 61);
+  cursor: pointer;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+@media screen and (max-width: 600px) {
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+  }
+
+  .navbar-buttons {
+    margin: 0;
+  }
+
+  .hero-cta {
+    max-width: 90%;
+  }
+
+  .about-cards-container {
+    flex-direction: column;
+  }
+}

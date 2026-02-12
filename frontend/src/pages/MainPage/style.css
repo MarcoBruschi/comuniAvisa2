@@ -1,0 +1,104 @@
+.main {
+  background-color: black;
+  min-height: 100vh;
+  animation: loaded 1s ease;
+}
+
+.buttons-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em; 
+}
+
+.welcome-text {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.user-greeting {
+  margin-top: 0.5em;
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.user-greeting span {
+  font-weight: bold;
+}
+
+.user-name {
+  display: inline-block;
+  color: goldenrod;
+  font-weight: 600;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  padding: 5em 0;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.main-section hr {
+  width: 100%;
+  border: 2px solid white;
+}
+
+.main-section-title {
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.logo-img {
+  margin-top: 1em;
+  animation: loaded 1s ease;
+}
+
+@media screen and (max-width: 730px) {
+  .logo-img {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 930px) {
+
+  .main-content {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .cards-container {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 540px) {
+
+  .main {
+    text-align: center;
+  }
+
+  .main-content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 2em;
+    gap: 1em;
+  }
+}

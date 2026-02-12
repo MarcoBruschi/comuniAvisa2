@@ -1,0 +1,17 @@
+.navbar {
+  background-color: black;
+  padding: 2em 1em;
+  border-bottom: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-title:hover {
+  cursor: pointer;
+}
