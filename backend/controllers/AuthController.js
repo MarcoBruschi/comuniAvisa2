@@ -12,7 +12,6 @@ class AuthController {
       const { email, senha } = req.body;
 
       if (!Functions.ValidarEmail(email)) return res.status(400).json({ erro: "Falha ao fazer login - email inválido" });
-      if (!Functions.ValidarSenha(senha)) return res.status(400).json({ erro: "Falha ao fazer login - senha inválida" });
 
       const usuario = await Usuario.findOne({ email });
       if (!usuario) return res.status(404).json({ erro: "Falha ao fazer login - usuário não encontrado" });

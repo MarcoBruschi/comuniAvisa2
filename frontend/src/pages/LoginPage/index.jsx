@@ -36,7 +36,7 @@ export default function LoginPage() {
     }
 
     try {
-      const response = await axios.post(`${process.meta.env.VITE_URL_BASE}/api/auth/login`, usuario, { withCredentials: true });
+      const response = await axios.post(`${import.meta.env.VITE_URL_BASE}/api/auth/login`, usuario, { withCredentials: true });
       if (response.data.sucesso) {
         setEmail("");
         setSenha("");

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from "../../components/Button";
 import NavBar from "../../components/NavBar";
 import axios from "axios";
+import axiosAuth from "../../AxiosInstance";
 import "./style.css";
 
 export default function SignPage() {
@@ -20,7 +21,7 @@ export default function SignPage() {
         const response = await axiosAuth.get("/api/usuario");
         if (response.data.sucesso) navigate("/home");
       } catch (error) {
-        navigate("/login");
+        navigate("/criarConta");
       }
     };
 

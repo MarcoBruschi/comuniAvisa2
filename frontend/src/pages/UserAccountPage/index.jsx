@@ -72,6 +72,20 @@ export default function UserAccountPage() {
 
   }
 
+  const handleDelete = async (e) => {
+    e.preventDefault(e);
+
+    try {
+      const response = await axiosAuth.delete("/api/usuario", {});
+      return navigate("/");
+    } catch (erro) {
+      if (erro.response && erro.response.data) {
+        const message = erro.response.data.erro;
+        return setMessage(message);
+      }
+    }
+  }
+
   return (
     <div className="main">
       <NavBar />
@@ -82,19 +96,22 @@ export default function UserAccountPage() {
           {message && <div className="message-field">{message}</div>}
           <form className="data-form" onSubmit={handleEdit}>
             <div className="data-field">
-              {isEdit === "nome" ? <><div>Nome: </div><input type="text" className="data-input" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /><span className="edit" onClick={changeIsEdit}>✅</span></>
+              {isEdit === "nome" ? <><div>Nome: </div><input type="text" className="data-input" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /><span className="edit" onClick={() => changeIsEdit(null)}>✅</span></>
                 :
                 <div>Nome: {nome} <span className="edit" onClick={() => changeIsEdit("nome")}>✏️</span></div>}
             </div>
             <div className="data-field">
-              {isEdit === "email" ? <><div>Email: </div><input type="email" className="data-input" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /><span className="edit" onClick={changeIsEdit}>✅</span></>
+              {isEdit === "email" ? <><div>Email: </div><input type="email" className="data-input" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /><span className="edit" onClick={() => changeIsEdit(null)}>✅</span></>
                 :
                 <div>Email: {email} <span className="edit" onClick={() => changeIsEdit("email")}>✏️</span></div>}
             </div>
             <div className="data-field">
               <div>CPF: {cpf}</div>
             </div>
-            {((nome && nome !== initialNome) || (email && email !== initialEmail)) ? <Button type="submit">Salvar Alterações</Button> : <Button type="button" onClick={(e) => { e.preventDefault(); navigate("/home") }}>Voltar</Button>}
+            <div className="data-buttons">
+              {((isEdit === null) && ((nome && nome !== initialNome) || (email && email !== initialEmail))) ? <Button type="submit">Salvar Alterações</Button> : <Button type="button" onClick={(e) => { e.preventDefault(); navigate("/home") }}>Voltar</Button>}
+              <Button onClick={handleDelete}>Deletar Conta</Button>
+            </div>
           </form>
         </div>
       </div>
