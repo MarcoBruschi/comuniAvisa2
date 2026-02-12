@@ -43,7 +43,7 @@ export default function MainPage() {
       <NavBar>
         {usuario?.roles.includes("admin") ? <div className="buttons-middle">
           <Button onClick={() => navigate("/home/dados")}>Gerenciar Perfil</Button>
-          <Button>Gerenciar Usuários</Button>
+          <Button onClick={() => navigate("/home/admin/usuarios")}>Gerenciar Usuários</Button>
         </div> : <Button onClick={() => navigate("/home/dados")}>Gerenciar Perfil</Button>}
         <Button onClick={handleLogout}>Logout</Button>
       </NavBar>

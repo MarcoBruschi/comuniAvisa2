@@ -1,0 +1,38 @@
+.main-container {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding: 5em 1em;
+}
+
+.card {
+  display: flex;
+  align-items: start;
+  width: 400px;
+  text-align: start;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-text {
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.main-title {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.line-usermanager {
+  width: 25%;
+}

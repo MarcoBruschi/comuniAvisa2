@@ -2,6 +2,7 @@ import Usuario from "../models/Usuario.js";
 import RefreshToken from "../models/RefreshToken.js";
 import bcrypt from "bcrypt";
 import Functions from "../functions/Functions.js";
+import jwt from "jsonwebtoken";
 
 class AdminUsersController {
 
@@ -87,9 +88,18 @@ class AdminUsersController {
             const id = req.params.id;
             if (!id) return res.status(400).json({ erro: "É necessário informar um id" });
 
+            const token = req.cookies.accessToken;
+            if (!token) return res.sendStatus(401);
+
+            const decode = jwt.verify(token, process.env.ACCESS_SECRET_KEY);
+            const logedId = decode.id;
+
+            if (id === logedId) return res.sendStatus(401);
+            if (decode.roles.includes("admin")) return res.status(401).json({ erro: "Não é permitido excluir um admin" });
+
             const usuario = await Usuario.findById(id);
             if (!usuario) return res.status(404).json({ erro: "Usuário não encontrado" });
-            
+
             await RefreshToken.deleteMany({ userID: id });
             await Usuario.findOneAndDelete({ _id: id });
             return res.status(200).json({ sucesso: "Usuário excluído com sucesso" });
