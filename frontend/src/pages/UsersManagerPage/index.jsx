@@ -43,7 +43,7 @@ export default function UsersManagerPage() {
       if (response.data.sucesso) setUsuarios(prev => prev.filter(user => user._id !== id));
     } catch (erro) {
       if (erro.response && erro.response.data) {
-        console.log(erro.response.data);
+        setMessage(erro.response.data.erro);
         return;
       }
     }
