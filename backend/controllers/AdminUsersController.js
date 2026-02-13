@@ -62,13 +62,13 @@ class AdminUsersController {
             const usuario = await Usuario.findById(id);
             if (!usuario) return res.status(404).json({ erro: "Usuário não encontrado" });
 
-            const { novoNome, novoEmail } = req.body;
+            const { nome, email } = req.body;
 
-            if (novoEmail && !Functions.ValidarEmail(novoEmail)) return res.status(400).json({ erro: "E-mail inválido" });
+            if (email && !Functions.ValidarEmail(email)) return res.status(400).json({ erro: "E-mail inválido" });
 
             const alterados = {};
-            if (novoNome && novoNome !== usuario.nome) alterados.nome = novoNome;
-            if (novoEmail && novoEmail !== usuario.email) alterados.email = novoEmail;
+            if (nome && nome !== usuario.nome) alterados.nome = nome;
+            if (email && email !== usuario.email) alterados.email = email;
 
             if (Object.keys(alterados).length === 0) return res.status(200).json({ sucesso: "Nenhuma alteração feira" });
 

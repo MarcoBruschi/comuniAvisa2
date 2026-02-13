@@ -36,3 +36,18 @@
 .line-usermanager {
   width: 25%;
 }
+
+.edit-input {
+  background-color: transparent;
+  outline: none;
+  border: 1px solid white;
+  width: 100%;
+  font-size: 22px;
+  padding: 0.25em;
+  border-radius: 2px;
+}
+
+.card-title {
+  align-items: center;
+  gap: 0.5em;
+}

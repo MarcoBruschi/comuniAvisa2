@@ -74,7 +74,6 @@ strong {
 .card:hover {
   transform: scale(1.1);
   transform: translateY(-10px);
-  background-color: rgb(61, 61, 61);
   cursor: pointer;
 }
 

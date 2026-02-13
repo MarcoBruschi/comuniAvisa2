@@ -66,8 +66,8 @@ export default function MainPage() {
               <Button>Acessar</Button>
             </Card>
             <Card className="card">
-              <div className="card-title">🔔Criar Alerta</div>
-              <div className="card-text">Configure alertas para a comunidade</div>
+              <div className="card-title">💡Criar Postagem</div>
+              <div className="card-text">Configure alertas e outros para a comunidade</div>
               <Button>Criar</Button>
             </Card>
           </div>
