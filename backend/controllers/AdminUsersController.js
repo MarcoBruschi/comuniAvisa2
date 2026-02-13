@@ -95,7 +95,8 @@ class AdminUsersController {
             const logedId = decode.id;
 
             if (id === logedId) return res.sendStatus(401);
-            if (decode.roles.includes("admin")) return res.status(401).json({ erro: "Não é permitido excluir um admin" });
+            const user = await Usuario.findById(id);
+            if (user.roles.includes("admin")) return res.status(403).json({ erro: "Não é permitido excluir um admin" });
 
             const usuario = await Usuario.findById(id);
             if (!usuario) return res.status(404).json({ erro: "Usuário não encontrado" });
