@@ -1,0 +1,47 @@
+.formfield {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  font-size: 24px;
+}
+
+.formfield label {
+  font-size: 20px;
+  margin-bottom: 0.25em;
+  font-weight: 300;
+}
+
+.formfield input {
+  background-color: transparent;
+  outline: none;
+  border: 1px solid white;
+  border-radius: 4px;
+  width: 100%;
+  padding: 1em 0.5em;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.message-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #ff0000;
+  background: rgba(82, 0, 0, 0.8);
+  padding: 0.75em 1.5em;
+  border-radius: 8px;
+  margin: 1em auto;
+  text-align: center;
+  max-height: 100px;
+  overflow: hidden;
+  animation: loaded 1s ease;
+}
+
+.formfield-buttons {
+  display: flex;
+  align-self: center;
+  gap: 1em;
+  justify-content: center;
+}

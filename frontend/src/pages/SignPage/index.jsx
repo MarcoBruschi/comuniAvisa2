@@ -4,7 +4,8 @@ import Button from "../../components/Button";
 import NavBar from "../../components/NavBar";
 import axios from "axios";
 import axiosAuth from "../../AxiosInstance";
-import "./style.css";
+import Form from "../../components/Form";
+import FormField from "../../components/FormField";
 
 export default function SignPage() {
 
@@ -54,33 +55,31 @@ export default function SignPage() {
   }
 
   return (
-    <div className="sign">
+    <div className="main">
       <NavBar />
-      <div className="sign-main">
-        <form className="sign-form" onSubmit={handleSubmit}>
+      <div className="main-form">
+        <Form onSubmit={handleSubmit}>
           <div className="form-title">Criar Conta</div>
-          <div className="form-fields-container">
-            {message && <div className="message-field">{message}</div>}
-            <div className="form-fields">
-              <label>Nome</label>
-              <input type="text" required={true} onChange={(e) => { setNome(e.target.value); setMessage("") }} />
-            </div>
-            <div className="form-fields">
-              <label>Email</label>
-              <input type="email" required={true} onChange={(e) => { setEmail(e.target.value); setMessage("") }} />
-            </div>
-            <div className="form-fields">
-              <label>Senha</label>
-              <input type="password" required={true} onChange={(e) => { setSenha(e.target.value); setMessage("") }} />
-            </div>
-            <div className="form-fields">
-              <label>CPF</label>
-              <input type="text" required={true} onChange={(e) => { setCpf(e.target.value); setMessage("") }} />
-            </div>
-            <Button>Criar Conta</Button>
-            <div className="login-span">Já possuí conta? <span onClick={() => navigate("/login")}>Fazer Login</span></div>
-          </div>
-        </form>
+          {message && <div className="message-field">{message}</div>}
+          <FormField>
+            <label>Nome</label>
+            <input type="text" required={true} onChange={(e) => { setNome(e.target.value); setMessage("") }} />
+          </FormField>
+          <FormField>
+            <label>Email</label>
+            <input type="email" required={true} onChange={(e) => { setEmail(e.target.value); setMessage("") }} />
+          </FormField>
+          <FormField>
+            <label>Senha</label>
+            <input type="password" required={true} onChange={(e) => { setSenha(e.target.value); setMessage("") }} />
+          </FormField>
+          <FormField>
+            <label>CPF</label>
+            <input type="text" required={true} onChange={(e) => { setCpf(e.target.value); setMessage("") }} />
+          </FormField>
+          <Button>Criar Conta</Button>
+          <div className="login-span">Já possuí conta? <span onClick={() => navigate("/login")}>Fazer Login</span></div>
+        </Form>
       </div>
     </div>
   );

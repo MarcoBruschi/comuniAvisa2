@@ -4,6 +4,8 @@ import "./style.css";
 import NavBar from "../../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import axiosAuth from "../../AxiosInstance";
+import Form from "../../components/Form";
+import FormField from "../../components/FormField";
 
 export default function UserAccountPage() {
   const navigate = useNavigate();
@@ -88,32 +90,32 @@ export default function UserAccountPage() {
 
   return (
     <div className="main">
-      <NavBar />
-      <div className="main-container">
-        <div className="data-container">
-          <div className="data-title">Dados</div>
-          <hr />
+      <NavBar>
+        <Button type="button" onClick={() => navigate("/home")}>Voltar</Button>
+      </NavBar>
+      <div className="main-form">
+        <Form onSubmit={handleEdit}>
+          <div className="form-title">Dados</div>
           {message && <div className="message-field">{message}</div>}
-          <form className="data-form" onSubmit={handleEdit}>
-            <div className="data-field">
-              {isEdit === "nome" ? <><div>Nome: </div><input type="text" className="data-input" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /><span className="edit" onClick={() => changeIsEdit(null)}>✅</span></>
-                :
-                <div>Nome: {nome} <span className="edit" onClick={() => changeIsEdit("nome")}>✏️</span></div>}
-            </div>
-            <div className="data-field">
-              {isEdit === "email" ? <><div>Email: </div><input type="email" className="data-input" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /><span className="edit" onClick={() => changeIsEdit(null)}>✅</span></>
-                :
-                <div>Email: {email} <span className="edit" onClick={() => changeIsEdit("email")}>✏️</span></div>}
-            </div>
-            <div className="data-field">
-              <div>CPF: {cpf}</div>
-            </div>
-            <div className="data-buttons">
-              {((isEdit === null) && ((nome && nome !== initialNome) || (email && email !== initialEmail))) ? <Button type="submit">Salvar Alterações</Button> : <Button type="button" onClick={(e) => { e.preventDefault(); navigate("/home") }}>Voltar</Button>}
-              <Button onClick={handleDelete}>Deletar Conta</Button>
-            </div>
-          </form>
-        </div>
+          <hr />
+          <FormField>
+            {isEdit === "nome" ? <><label>Nome: </label><div className="formfield-edit"><input type="text" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /><span onClick={() => changeIsEdit(null)}>✅</span></div></>
+            :
+            <label>Nome: {nome} <span onClick={() => changeIsEdit("nome")}>✏️</span></label>}
+          </FormField>
+          <FormField>
+            {isEdit === "email" ? <><label>Email: </label><div className="formfield-edit"><input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /><span onClick={() => changeIsEdit(null)}>✅</span></div></>
+              :
+              <label>Email: {email} <span onClick={() => changeIsEdit("email")}>✏️</span></label>}
+          </FormField>
+          <FormField>
+            <label>CPF: {cpf}</label>
+          </FormField>
+          <FormField className="formfield-buttons">
+            {((isEdit === null) && ((nome && nome !== initialNome) || (email && email !== initialEmail))) ? <Button type="submit">Salvar Alterações</Button> : <Button type="button" onClick={(e) => { e.preventDefault(); setNome(initialNome); setEmail(initialEmail) }}>Desfazer</Button>}
+            <Button onClick={handleDelete}>Deletar Conta</Button>
+          </FormField>
+        </Form>
       </div>
     </div>
   );

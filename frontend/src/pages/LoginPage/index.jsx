@@ -2,10 +2,11 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import NavBar from "../../components/NavBar";
 import axios from "axios";
-import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axiosAuth from "../../AxiosInstance";
+import Form from "../../components/Form";
+import FormField from "../../components/FormField";
 
 export default function LoginPage() {
 
@@ -52,25 +53,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="login">
+    <div className="main">
       <NavBar />
-      <div className="login-main">
-        <form className="login-form" onSubmit={handleSubmit}>
+      <div className="main-form">
+        <Form onSubmit={handleSubmit}>
           <div className="form-title">Login</div>
-          <div className="form-fields-container">
-            {message && <div className="message-field">{message}</div>}
-            <div className="form-fields">
-              <label>Email</label>
-              <input type="email" required={true} onChange={(e) => { setEmail(e.target.value); setMessage("") }} />
-            </div>
-            <div className="form-fields">
-              <label>Senha</label>
-              <input type="password" required={true} onChange={(e) => { setSenha(e.target.value); setMessage("") }} />
-            </div>
-            <Button>Logar</Button>
-            <div className="login-span">Não possuí conta? <span onClick={() => navigate("/criarConta")}>Criar Conta</span></div>
-          </div>
-        </form>
+          {message && <div className="message-field">{message}</div>}
+          <FormField>
+            <label>Email</label>
+            <input type="email" required={true} onChange={(e) => { setEmail(e.target.value); setMessage("") }} />
+          </FormField>
+          <FormField>
+            <label>Senha</label>
+            <input type="password" required={true} onChange={(e) => { setSenha(e.target.value); setMessage("") }} />
+          </FormField>
+          <Button>Logar</Button>
+          <div className="login-span">Não possuí conta? <span onClick={() => navigate("/criarConta")}>Criar Conta</span></div>
+        </Form>
       </div>
     </div>
   );

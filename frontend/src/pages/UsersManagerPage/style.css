@@ -1,15 +1,10 @@
-.main-container {
-  display: flex;
-  align-items: center;
-  gap: 2em;
-  padding: 5em 1em;
-}
-
 .card {
   display: flex;
   align-items: start;
   width: 400px;
   text-align: start;
+  align-self: center;
+  animation: loaded 1s;
 }
 
 .options {
@@ -21,7 +16,7 @@
   width: 100%;
 }
 
-.buttons {
+.card-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,10 +26,6 @@
 .main-title {
   font-size: 32px;
   font-weight: 600;
-}
-
-.line-usermanager {
-  width: 25%;
 }
 
 .edit-input {

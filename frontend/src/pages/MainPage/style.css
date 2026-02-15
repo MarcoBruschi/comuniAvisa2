@@ -47,8 +47,10 @@
   gap: 2em;
 }
 
-.main-section hr {
+hr {
+  align-self: center;
   width: 100%;
+  --finalwidth: 200%;
   border: 2px solid white;
 }
 
