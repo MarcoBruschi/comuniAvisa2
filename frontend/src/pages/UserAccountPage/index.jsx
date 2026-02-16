@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axiosAuth from "../../AxiosInstance";
 import Form from "../../components/Form";
 import FormField from "../../components/FormField";
+import Modal from "../../components/Modal";
 
 export default function UserAccountPage() {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ export default function UserAccountPage() {
   const [nome, setNome] = useState(initialNome);
   const [email, setEmail] = useState(initialEmail);
   const [cpf, setCpf] = useState("");
+
+  const [modal, setModal] = useState(false);
 
   const changeIsEdit = (e) => {
     if (isEdit !== null) {
@@ -90,6 +93,14 @@ export default function UserAccountPage() {
 
   return (
     <div className="main">
+      {modal ? <Modal title="Deletar Conta">
+        Tem certeza que deseja deletar sua conta?
+        <div className="modal-buttons">
+          <Button onClick={handleDelete}>Sim</Button>
+          <Button onClick={(e) => { e.preventDefault(); setModal(false); }}>Não</Button>
+        </div>
+      </Modal> :
+        ""}
       <NavBar>
         <Button type="button" onClick={() => navigate("/home")}>Voltar</Button>
       </NavBar>
@@ -100,8 +111,8 @@ export default function UserAccountPage() {
           <hr />
           <FormField>
             {isEdit === "nome" ? <><label>Nome: </label><div className="formfield-edit"><input type="text" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /><span onClick={() => changeIsEdit(null)}>✅</span></div></>
-            :
-            <label>Nome: {nome} <span onClick={() => changeIsEdit("nome")}>✏️</span></label>}
+              :
+              <label>Nome: {nome} <span onClick={() => changeIsEdit("nome")}>✏️</span></label>}
           </FormField>
           <FormField>
             {isEdit === "email" ? <><label>Email: </label><div className="formfield-edit"><input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /><span onClick={() => changeIsEdit(null)}>✅</span></div></>
@@ -113,7 +124,7 @@ export default function UserAccountPage() {
           </FormField>
           <FormField className="formfield-buttons">
             {((isEdit === null) && ((nome && nome !== initialNome) || (email && email !== initialEmail))) ? <Button type="submit">Salvar Alterações</Button> : <Button type="button" onClick={(e) => { e.preventDefault(); setNome(initialNome); setEmail(initialEmail) }}>Desfazer</Button>}
-            <Button onClick={handleDelete}>Deletar Conta</Button>
+            <Button onClick={(e) => { e.preventDefault(); setModal(true) }}>Deletar Conta</Button>
           </FormField>
         </Form>
       </div>

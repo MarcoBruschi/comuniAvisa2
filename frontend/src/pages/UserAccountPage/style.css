@@ -5,6 +5,10 @@
   gap: 1em;
 }
 
+.formfield span:hover {
+  cursor: pointer;
+}
+
 .formfield-edit span {
   font-size: 32px;
   transition: transform 0.5s;

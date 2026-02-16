@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 import Card from "../../components/Card";
 import "./style.css";
 import Form from "../../components/Form";
-import FormField from "../../components/FormField";
+import Modal from "../../components/Modal";
 
 export default function UsersManagerPage() {
   const navigate = useNavigate();
@@ -21,6 +21,9 @@ export default function UsersManagerPage() {
   const [email, setEmail] = useState("");
 
   const [message, setMessage] = useState("");
+
+  const [modal, setModal] = useState(false);
+  const [userIdDelete, setUserIdDelete] = useState(null);
 
   useEffect(() => {
     const verificarToken = async () => {
@@ -40,11 +43,14 @@ export default function UsersManagerPage() {
   }, [navigate]);
 
   const handleDelete = async (id) => {
+    setUserIdDelete(null);
     try {
       const response = await axiosAuth.delete(`/api/admin/usuarios/${id}`);
       if (response.data.sucesso) setUsuarios(prev => prev.filter(user => user._id !== id));
+      setModal(false);
     } catch (erro) {
       if (erro.response && erro.response.data) {
+        setModal(false);
         setMessage(erro.response.data.erro);
         return;
       }
@@ -82,6 +88,14 @@ export default function UsersManagerPage() {
 
   return (
     <div className="main">
+      {modal ? <Modal title="Deletar Conta">
+        Tem certeza que deseja deletar esse usuário?
+        <div className="modal-buttons">
+          <Button onClick={(e) => { e.preventDefault(); handleDelete(userIdDelete); }}>Sim</Button>
+          <Button onClick={(e) => { e.preventDefault(); setModal(false); }}>Não</Button>
+        </div>
+      </Modal> :
+        ""}
       <NavBar>
         <Button type="button" onClick={() => navigate("/home")}>Voltar</Button>
       </NavBar>
@@ -104,11 +118,11 @@ export default function UsersManagerPage() {
                   {user.roles?.map((role, index) => <div key={index}>{role}</div>)}
                 </div>
                 <div className="card-buttons">
-                  {userEditId === user._id ? <><Button onClick={(e) => { e.preventDefault(); handleEditChanges(user)}}>✅</Button><Button onClick={(e) => { e.preventDefault(); handleEdit(user) }}>❌</Button></> :
-                    <><Button onClick={(e) => { e.preventDefault(e); handleEdit(user); }}>✏️</Button><Button onClick={(e) => { e.preventDefault(); handleDelete(user._id); }}>🗑️</Button></>}
+                  {userEditId === user._id ? <><Button onClick={(e) => { e.preventDefault(); handleEditChanges(user) }}>✅</Button><Button onClick={(e) => { e.preventDefault(); handleEdit(user) }}>❌</Button></> :
+                    <><Button onClick={(e) => { e.preventDefault(e); handleEdit(user); }}>✏️</Button><Button onClick={(e) => { e.preventDefault(); setModal(true); setUserIdDelete(user._id); }}>🗑️</Button></>}
                 </div>
               </div>
-            </Card>  
+            </Card>
           )}
         </Form>
       </div>

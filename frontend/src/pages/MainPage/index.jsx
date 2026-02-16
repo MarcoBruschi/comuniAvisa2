@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
 import NavBar from "../../components/NavBar";
 import "./style.css";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
 import logo from '../../assets/logoComuniAvisa.png';
 import axiosAuth from "../../AxiosInstance.js";
+import Modal from "../../components/Modal/index.jsx";
 
 export default function MainPage() {
   const [usuario, setUsuario] = useState(null);
@@ -68,7 +68,7 @@ export default function MainPage() {
             <Card className="card">
               <div className="card-title">💡Criar Postagem</div>
               <div className="card-text">Configure alertas e outros para a comunidade</div>
-              <Button>Criar</Button>
+              <Button onClick={() => navigate("/home/criarPost")}>Criar</Button>
             </Card>
           </div>
         </div>
