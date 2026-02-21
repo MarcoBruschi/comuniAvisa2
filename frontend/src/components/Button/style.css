@@ -1,17 +1,36 @@
 .button {
-  padding: 1em 1.5em;
   font-size: 14px;
   font-weight: bold;
   background-color: transparent;
   border: 2px solid white;
   border-radius: 4px;
-  transition: background-color 0.5s ease, transform 0.5s ease;
+  transition: background-color 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease;
 }
 
-.button:hover {
+.button:not(:has(img)) {
+  padding: 1em 1.5em;
+}
+
+.button:has(img) {
+  padding: 0.3em 0.5em;
+}
+
+.button:hover:not(:has(img)) {
   cursor: pointer;
   background-color: white;
   color: black;
   transform: scale(1.1);
   transform: translateY(-5px);
+}
+
+.button:hover:has(img) {
+  cursor: pointer;
+  color: black;
+  box-shadow: 2px 3px 3px 0px white;
+  transform: scale(1.1);
+  transform: translateY(-5px);
+}
+
+.button img {
+  max-width: 50px;
 }

@@ -6,6 +6,7 @@ import axios from "axios";
 import axiosAuth from "../../AxiosInstance";
 import Form from "../../components/Form";
 import FormField from "../../components/FormField";
+import Footer from "../../components/Footer";
 
 export default function SignPage() {
 
@@ -55,6 +56,7 @@ export default function SignPage() {
   }
 
   return (
+    <>
     <div className="main">
       <NavBar />
       <div className="main-form">
@@ -82,5 +84,7 @@ export default function SignPage() {
         </Form>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }

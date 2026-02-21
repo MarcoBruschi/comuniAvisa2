@@ -7,6 +7,9 @@ import axiosAuth from "../../AxiosInstance";
 import Form from "../../components/Form";
 import FormField from "../../components/FormField";
 import Modal from "../../components/Modal";
+import Footer from "../../components/Footer";
+import editIcon from "../../assets/editIcon.svg";
+import correctIcon from "../../assets/correctIcon.svg";
 
 export default function UserAccountPage() {
   const navigate = useNavigate();
@@ -92,6 +95,7 @@ export default function UserAccountPage() {
   }
 
   return (
+    <>
     <div className="main">
       {modal ? <Modal title="Deletar Conta">
         Tem certeza que deseja deletar sua conta?
@@ -110,14 +114,14 @@ export default function UserAccountPage() {
           {message && <div className="message-field">{message}</div>}
           <hr />
           <FormField>
-            {isEdit === "nome" ? <><label>Nome: </label><div className="formfield-edit"><input type="text" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /><span onClick={() => changeIsEdit(null)}>✅</span></div></>
+            {isEdit === "nome" ? <><label className="profile-edit-label">Nome: </label><div className="formfield-edit"><input type="text" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /><span onClick={() => changeIsEdit(null)}><img src={correctIcon} alt="Editar ícone" /></span></div></>
               :
-              <label>Nome: {nome} <span onClick={() => changeIsEdit("nome")}>✏️</span></label>}
+              <label className="profile-edit-label"><div>Nome: {nome} </div><span className="profile-edit-span" onClick={() => changeIsEdit("nome")}><img src={editIcon} alt="Editar ícone" /></span></label>}
           </FormField>
           <FormField>
-            {isEdit === "email" ? <><label>Email: </label><div className="formfield-edit"><input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /><span onClick={() => changeIsEdit(null)}>✅</span></div></>
+            {isEdit === "email" ? <><label className="profile-edit-label">Email: </label><div className="formfield-edit"><input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /><span onClick={() => changeIsEdit(null)}><img src={correctIcon} alt="Editar ícone" /></span></div></>
               :
-              <label>Email: {email} <span onClick={() => changeIsEdit("email")}>✏️</span></label>}
+              <label className="profile-edit-label"><div>Email: {email}</div> <span className="profile-edit-span" onClick={() => changeIsEdit("email")}><img src={editIcon} alt="Editar ícone" /></span></label>}
           </FormField>
           <FormField>
             <label>CPF: {cpf}</label>
@@ -129,5 +133,7 @@ export default function UserAccountPage() {
         </Form>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }

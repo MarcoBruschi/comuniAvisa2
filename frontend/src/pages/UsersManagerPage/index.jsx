@@ -7,6 +7,11 @@ import Card from "../../components/Card";
 import "./style.css";
 import Form from "../../components/Form";
 import Modal from "../../components/Modal";
+import Footer from "../../components/Footer";
+import editIcon from "../../assets/editIcon.svg";
+import correctIcon from "../../assets/correctIcon.svg";
+import deleteIcon from "../../assets/deleteIcon.svg";
+import wrongIcon from "../../assets/wrongIcon.svg";
 
 export default function UsersManagerPage() {
   const navigate = useNavigate();
@@ -87,45 +92,47 @@ export default function UsersManagerPage() {
   }
 
   return (
-    <div className="main">
-      {modal ? <Modal title="Deletar Conta">
-        Tem certeza que deseja deletar esse usuário?
-        <div className="modal-buttons">
-          <Button onClick={(e) => { e.preventDefault(); handleDelete(userIdDelete); }}>Sim</Button>
-          <Button onClick={(e) => { e.preventDefault(); setModal(false); }}>Não</Button>
-        </div>
-      </Modal> :
-        ""}
-      <NavBar>
-        <Button type="button" onClick={() => navigate("/home")}>Voltar</Button>
-      </NavBar>
-      <div className="main-form">
-        <Form>
-          <div className="form-title">Usuários</div>
-          {message && <div className="message-field">{message}</div>}
-          <hr />
+    <>
+      <div className="main">
+        {modal && <Modal title="Deletar Conta">
+          Tem certeza que deseja deletar esse usuário?
+          <div className="modal-buttons">
+            <Button onClick={(e) => { e.preventDefault(); handleDelete(userIdDelete); }}>Sim</Button>
+            <Button onClick={(e) => { e.preventDefault(); setModal(false); }}>Não</Button>
+          </div>
+        </Modal>}
+        <NavBar>
+          <Button type="button" onClick={() => navigate("/home")}>Voltar</Button>
+        </NavBar>
+        <div className="main-form">
+          <Form>
+            <div className="form-title">Usuários</div>
+            {message && <div className="message-field">{message}</div>}
+            <hr />
 
-          {usuarios && usuarios.filter(user => !user.roles.includes("admin")).map((user, index) =>
-            <Card className="card" key={index}>
-              {userEditId == user._id ? <div className="card-text"><span className="card-title">Nome: <input type="text" className="edit-input" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /></span></div> :
-                <div className="card-text"><span className="card-title">Nome: </span>{user.nome}</div>}
-              {userEditId == user._id ? <div className="card-text"><span className="card-title">Email: <input type="text" className="edit-input" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /></span></div> :
-                <div className="card-text"><span className="card-title">Email: </span>{user.email}</div>}
-              <div className="card-text"><span className="card-title">CPF: </span>{user.cpf}</div>
-              <div className="card-text options">
-                <div className="roles">
-                  <div className="card-title">Roles:</div>
-                  {user.roles?.map((role, index) => <div key={index}>{role}</div>)}
+            {usuarios && usuarios.filter(user => !user.roles.includes("admin")).map((user, index) =>
+              <Card className="card" key={index}>
+                {userEditId == user._id ? <div className="card-text"><span className="card-title">Nome: <input type="text" className="edit-input" value={nome} onChange={(e) => { setNome(e.target.value); setMessage(""); }} /></span></div> :
+                  <div className="card-text"><span className="card-title">Nome: </span>{user.nome}</div>}
+                {userEditId == user._id ? <div className="card-text"><span className="card-title">Email: <input type="text" className="edit-input" value={email} onChange={(e) => { setEmail(e.target.value); setMessage(""); }} /></span></div> :
+                  <div className="card-text"><span className="card-title">Email: </span>{user.email}</div>}
+                <div className="card-text"><span className="card-title">CPF: </span>{user.cpf}</div>
+                <div className="card-text options">
+                  <div className="roles">
+                    <div className="card-title">Roles:</div>
+                    {user.roles?.map((role, index) => <div key={index}>{role}</div>)}
+                  </div>
+                  <div className="card-buttons">
+                    {userEditId === user._id ? <><Button onClick={(e) => { e.preventDefault(); handleEditChanges(user) }}><img src={correctIcon} alt="Editar ícone" /></Button><Button onClick={(e) => { e.preventDefault(); handleEdit(user) }}><img src={wrongIcon} alt="Cancelar ícone" /></Button></> :
+                      <><Button onClick={(e) => { e.preventDefault(e); handleEdit(user); }}><img src={editIcon} alt="Editar ícone" /></Button><Button onClick={(e) => { e.preventDefault(); setModal(true); setUserIdDelete(user._id); }}><img src={deleteIcon} alt="Deletar ícone" /></Button></>}
+                  </div>
                 </div>
-                <div className="card-buttons">
-                  {userEditId === user._id ? <><Button onClick={(e) => { e.preventDefault(); handleEditChanges(user) }}>✅</Button><Button onClick={(e) => { e.preventDefault(); handleEdit(user) }}>❌</Button></> :
-                    <><Button onClick={(e) => { e.preventDefault(e); handleEdit(user); }}>✏️</Button><Button onClick={(e) => { e.preventDefault(); setModal(true); setUserIdDelete(user._id); }}>🗑️</Button></>}
-                </div>
-              </div>
-            </Card>
-          )}
-        </Form>
+              </Card>
+            )}
+          </Form>
+        </div>
       </div>
-    </div>
+      <Footer/>
+    </>
   );
 }

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import axiosAuth from "../../AxiosInstance";
 import Form from "../../components/Form";
 import FormField from "../../components/FormField";
+import Footer from "../../components/Footer";
 
 export default function LoginPage() {
 
@@ -53,24 +54,27 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="main">
-      <NavBar />
-      <div className="main-form">
-        <Form onSubmit={handleSubmit}>
-          <div className="form-title">Login</div>
-          {message && <div className="message-field">{message}</div>}
-          <FormField>
-            <label>Email</label>
-            <input type="email" required={true} onChange={(e) => { setEmail(e.target.value); setMessage("") }} />
-          </FormField>
-          <FormField>
-            <label>Senha</label>
-            <input type="password" required={true} onChange={(e) => { setSenha(e.target.value); setMessage("") }} />
-          </FormField>
-          <Button>Logar</Button>
-          <div className="login-span">Não possuí conta? <span onClick={() => navigate("/criarConta")}>Criar Conta</span></div>
-        </Form>
+    <>
+      <div className="main">
+        <NavBar />
+        <div className="main-form">
+          <Form onSubmit={handleSubmit}>
+            <div className="form-title">Login</div>
+            {message && <div className="message-field">{message}</div>}
+            <FormField>
+              <label>Email</label>
+              <input type="email" required={true} onChange={(e) => { setEmail(e.target.value); setMessage("") }} />
+            </FormField>
+            <FormField>
+              <label>Senha</label>
+              <input type="password" required={true} onChange={(e) => { setSenha(e.target.value); setMessage("") }} />
+            </FormField>
+            <Button>Logar</Button>
+            <div className="login-span">Não possuí conta? <span onClick={() => navigate("/criarConta")}>Criar Conta</span></div>
+          </Form>
+        </div>
       </div>
-    </div>
+      <Footer/>
+    </>
   );
 }

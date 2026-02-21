@@ -5,6 +5,19 @@ import Usuario from "../models/Usuario.js";
 import Blacklist from "../models/BlackList.js";
 
 class Functions {
+
+    async ValidarImagem(url) {
+        try {
+            const response = await fetch(url, {
+                method: 'HEAD'
+            });
+            const contentType = response.headers.get('content-type');
+            return contentType && contentType.startsWith('image/');
+        } catch (err) {
+            return false;
+        }
+    }
+
     ValidarEmail(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
@@ -42,9 +55,8 @@ class Functions {
 
     async AutenticarToken(req, res, next) {
         const token = req.cookies.accessToken;
-
         if (!token) return res.sendStatus(401);
-        const blacklisted = await Blacklist.findOne({token: token})
+        const blacklisted = await Blacklist.findOne({ token: token })
         if (blacklisted) return res.sendStatus(401);
         jwt.verify(token, process.env.ACCESS_SECRET_KEY, (erro, usuario) => {
             if (erro) return res.sendStatus(403);
@@ -62,7 +74,7 @@ class Functions {
             const usuario = await Usuario.findById(decoded.id);
             if (!usuario) return res.sendStatus(403);
 
-            
+
             const permissao = usuario.roles.some(role => rolesAutorizadas.includes(role));
             if (!permissao) return res.sendStatus(403);
 

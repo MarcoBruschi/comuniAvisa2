@@ -19,3 +19,19 @@
   cursor: pointer;
   transform: scale(1.1);
 }
+
+.profile-edit-label {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  line-break: anywhere;
+}
+
+.profile-edit-span {
+  transition: transform 0.5s ease;
+}
+
+.profile-edit-span:hover {
+  transform: scale(1.1);
+}

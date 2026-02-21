@@ -72,7 +72,7 @@ class AuthController {
       let decoded;
       try {
         decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
-      } catch (err) {
+      } catch (erro) {
         return res.sendStatus(403);
       }
 

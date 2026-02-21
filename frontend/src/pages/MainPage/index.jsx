@@ -7,7 +7,9 @@ import Button from "../../components/Button";
 import Card from "../../components/Card";
 import logo from '../../assets/logoComuniAvisa.png';
 import axiosAuth from "../../AxiosInstance.js";
-import Modal from "../../components/Modal/index.jsx";
+import eyeIcon from "../../assets/eyeIcon.svg";
+import bulbIcon from "../../assets/bulbIcon.svg";
+import Footer from "../../components/Footer/index.jsx";
 
 export default function MainPage() {
   const [usuario, setUsuario] = useState(null);
@@ -39,6 +41,7 @@ export default function MainPage() {
   }, [navigate]);
 
   return (
+    <>
     <div className="main">
       <NavBar>
         {usuario?.roles.includes("admin") ? <div className="buttons-middle">
@@ -61,12 +64,12 @@ export default function MainPage() {
           <hr />
           <div className="cards-container">
             <Card className="card">
-              <div className="card-title">📰Ver Postagens</div>
+              <div className="card-title"><img src={eyeIcon} alt="Olho ícone" />Ver Postagens</div>
               <div className="card-text">Explore postagens da comunidade</div>
-              <Button>Acessar</Button>
+              <Button onClick={() => navigate("/home/posts")}>Acessar</Button>
             </Card>
             <Card className="card">
-              <div className="card-title">💡Criar Postagem</div>
+              <div className="card-title"><img src={bulbIcon} alt="Lâmpada ícone" />Criar Postagem</div>
               <div className="card-text">Configure alertas e outros para a comunidade</div>
               <Button onClick={() => navigate("/home/criarPost")}>Criar</Button>
             </Card>
@@ -74,6 +77,8 @@ export default function MainPage() {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

@@ -4,6 +4,10 @@ import Card from "../../components/Card"
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import alertIcon from "../../assets/alertIcon.svg";
+import serviceIcon from "../../assets/serviceIcon.svg";
+import communityIcon from "../../assets/communityIcon.svg";
+import Footer from "../../components/Footer";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -14,6 +18,7 @@ export default function Home() {
   }, []);
 
   return (
+    <>
     <div className={animate && "home"}>
       <NavBar>
         <div className="navbar-buttons">
@@ -29,20 +34,22 @@ export default function Home() {
         <Button onClick={() => navigate("/criarConta")}>Começar Agora!</Button>
         <div className="about-title">Crie sua conta e faça parte da sua comunidade digital.</div>
         <div className="about-cards-container">
-          <Card className="card">
-            <div className="card-title">🚨 Alertas em Tempo Real</div>
+          <Card className="card card-home">
+            <div className="card-title"><img src={alertIcon} alt="Alerta ícone"/> Alertas em Tempo Real</div>
             <div className="card-text">Receber e publicar avisos importantes para sua comunidade</div>
           </Card>
-          <Card className="card">
-            <div className="card-title">🤝 Serviços e Oportunidades Locais</div>
+          <Card className="card card-home">
+            <div className="card-title"><img src={serviceIcon} alt="Serviço ícone" /> Serviços e Oportunidades Locais</div>
             <div className="card-text">Valorizar o que é da sua comunidade</div>
           </Card>
-          <Card className="card">
-            <div className="card-title">🏘️ Comunidades Organizadas</div>
+          <Card className="card card-home">
+            <div className="card-title"><img src={communityIcon} alt="Comunidade ícone"/> Comunidades Organizadas</div>
             <div className="card-text">Receber e publicar avisos importantes para sua comunidade</div>
           </Card>
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   )
 }
