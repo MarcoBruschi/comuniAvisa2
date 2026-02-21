@@ -39,7 +39,7 @@ class AlertaController {
       
       const { imagem, titulo, descricao, comentarios = [] } = req.body;
       const imagemValida = await Functions.ValidarImagem(imagem);
-      if (!imagemValida) return res.status(400).json({ erro: "Falha ao postar alerta - a imagem enviada não é válida" });
+      if (!imagemValida && imagem) return res.status(400).json({ erro: "Falha ao postar alerta - a imagem enviada não é válida" });
       if (!titulo) return res.status(400).json({ erro: "Falha ao postar alerta - título é obrigatório" });
       if (!comentarios) comentarios = [];
 
@@ -57,6 +57,32 @@ class AlertaController {
       return res.status(201).json({ sucesso: novoAlerta });
     } catch (erro) {
       return res.status(500).json({ erro: "Falha no servidor" });
+    }
+  }
+
+  async DeletarAlerta(req, res) {
+    try {
+      const idAlerta = req.params.id;
+      const userId = req.body.userId;
+      if (!userId) return res.status(403).json({ erro: "Falha ao deletar Alerta"});
+      if (!idAlerta) return res.status(400).json({ erro: "Falha ao deletar Alerta - O id do Alerta deve ser informado" });
+      const token = req.cookies.accessToken;
+      let decoded;
+      try {
+        decoded = jwt.verify(token, process.env.ACCESS_SECRET_KEY);
+      } catch (erro) {
+        return res.sendStatus(403);
+      }
+
+      if (!decoded.role.includes("admin") && decoded.id !== userId) {
+        return res.status(403).json({ erro: "Falha ao deletar Alerta - Você não pode deletar esse Alerta" });
+      }
+
+      await Alerta.findByIdAndDelete(idAlerta);
+      return res.status(200).json({ sucesso: "Alerta excluído "});
+
+    } catch(erro) {
+      return res.status(500).json({ erro: "Falha no servidor"+erro });
     }
   }
 

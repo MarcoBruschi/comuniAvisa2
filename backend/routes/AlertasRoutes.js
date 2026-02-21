@@ -7,5 +7,6 @@ const router = express.Router();
 router.get("/api/alertas", Functions.AutenticarToken, (req, res) => AlertaController.ListarAlertas(req, res));
 router.get("/api/alertas/:id", Functions.AutenticarToken, (req, res) => AlertaController.ListarAlertaPorId(req, res));
 router.post("/api/alertas", Functions.AutenticarToken, (req, res) => AlertaController.PostarAlerta(req, res));
+router.delete("/api/alertas/:id", Functions.AutenticarToken, (req, res) => AlertaController.DeletarAlerta(req, res));
 
 export default router;
